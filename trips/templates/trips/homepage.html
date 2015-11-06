@@ -1,0 +1,43 @@
+{% extends "trips/trips_base.html" %}
+{% load static %}
+{% block content_trip %}
+    <div class="main-image">
+        <img src="{% static "trips/images/homepagebackground.jpg" %}" alt="homepage background" />
+        <div class="call-to-action">
+            <h2 class="margin">Share your travels</h2>
+        </div>
+    </div>
+    <section class="homepage-info">
+   
+        <div class="row">
+        
+         <div class="small-12 medium-4 columns text-center">
+            <h3 class="custom-blue"><span class="dropcap_red lsf-icon-dropcap" title="camera"></span> Upload photos <i class="fi-camera"></i></h3>
+            <p>Upload photos from your trip and share with family and friends. Add filters to make your photos stand out.</p>
+         </div>
+         
+      
+          <div class="small-12 medium-4 columns text-center">
+            <h3 class="custom-blue"><span class="dropcap_black lsf-icon-dropcap" title="cloud"></span> Tell stories <i class="fi-clipboard-notes"></i></h3>
+            <p> Write about your individual experiences to give your followers an intimate look into your travels.</p>
+          </div>
+          
+          
+          <div class="small-12 medium-4 columns text-center">
+            <h3 class="custom-blue"><span class="dropcap_black lsf-icon-dropcap" title="video"></span> Signup for free <i class="fi-torsos-all"></i></h3>
+            <p>Start sharing your travel experiences.</p>
+            <a href="" class="button default rounded">Signup</a>
+          </div>
+        
+        </div>
+        
+    </section>
+    <section>
+        <h2 class="text-center margin">Where have you been?</h2>
+        <div class="image-wall-container">
+            {% for image in images %}
+                <img src="{{ image.picture_small.url }}" alt="Picture of Rango" /> <!-- New line -->
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}

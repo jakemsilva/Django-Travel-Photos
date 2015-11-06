@@ -1,0 +1,133 @@
+/* Universal */
+
+body {
+	font-family: "Open Sans",Arial,sans-serif;
+	font-size: 13px;
+	line-height: 19px;
+	font-weight: 300;
+	color: #888;
+	text-rendering: optimizeLegibility;
+}
+
+h1,h2,h3,h4,h5,h6 {
+    font-family: "Open Sans",Arial,sans-serif;
+    color: #444;
+}
+
+.block{
+	display: block;
+}
+
+.overlay{
+	background: rgba(0,0,0,0.6);
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	z-index: 8;
+}
+
+/* Navigation */
+
+.top-bar{
+	z-index: 15;
+	background: #280f46 !important;
+}
+
+.top-bar-section ul li {
+	background: none;
+}
+
+.top-bar-section li:not(.has-form) a:not(.button) {
+	background: none !important;
+}
+
+/* Foundation Changes */
+
+.panel{
+	background: #fff;
+}
+
+section .row{
+	position: relative;
+	z-index: 10;
+}
+
+/* Login Page */
+
+#login { 
+  	background: url(../registration/images/background-login.jpg) no-repeat center center fixed; 
+  	-webkit-background-size: cover;
+  	-moz-background-size: cover;
+  	-o-background-size: cover;
+  	background-size: cover;
+  	position: absolute;
+	top: 0;
+	right: 0;
+	left: 0;
+	bottom: 0;
+}
+
+#login .panel{
+	margin-top: 125px;
+}
+
+/* Register Page */
+
+#register { 
+  	background: url(../registration/images/background-register.jpg) no-repeat center center fixed; 
+  	-webkit-background-size: cover;
+  	-moz-background-size: cover;
+  	-o-background-size: cover;
+  	background-size: cover;
+  	position: absolute;
+	top: 0;
+	right: 0;
+	left: 0;
+	bottom: 0;
+}
+
+#register .panel{
+	margin-top: 125px;
+}
+
+/* Trip Index */
+.section-margin{
+	margin-top: 30px;
+}
+
+#trips-index h1{
+	font-family: 'PT Sans', sans-serif;
+	font-weight: 700;
+	color: #54e8c3;
+}
+
+#trips-index h2{
+	color: #ddd;
+}
+
+#trips-index .welcome i{
+	font-size: 250px;
+}
+
+#trips-index .welcome a{
+	color: #6694c7;
+}
+
+#trips-index .welcome a:hover{
+	color: #2ba6cb;
+}
+
+/* Add Trip */
+
+#trips-add-trip { 
+  	background: url(../trips/images/templatemo_slide_3.jpg) no-repeat center center fixed; 
+  	-webkit-background-size: cover;
+  	-moz-background-size: cover;
+  	-o-background-size: cover;
+  	background-size: cover;
+  	position: absolute;
+	top: 0;
+	right: 0;
+	left: 0;
+	bottom: 0;
+}

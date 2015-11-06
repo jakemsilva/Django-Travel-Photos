@@ -1,0 +1,24 @@
+{% extends "trips/trips_base.html" %}
+
+{% block content_trip %}
+
+<h1>{{ experience_title }}</h1>
+<p>{{ experience_description }}</p>
+
+<a href="/trips/{{ trip_title_slug }}/{{experience.id}}/add_image/">Add images</a>
+ {% if images %}
+
+            <ul>
+                {% for image in images %}
+                <img src="/media/{{ image.picture }}" alt="Picture of Rango" /> <!-- New line -->
+                {% endfor %}
+            </ul>
+              
+ {% else %}
+ 
+ no images
+ 
+ {% endif %}
+
+       
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends "trips/trips_base.html" %}
+
+{% block content_trip %}
+	<div class="small-4 columns">
+        <h1>Add a Experience</h1>
+
+        <form id="experience_form" method="post" action="/trips/view_trip/{{ trip.slug }}/add_experience/">
+
+            {% csrf_token %}
+            {% for hidden in form.hidden_fields %}
+                {{ hidden }}
+            {% endfor %}
+
+            {% for field in form.visible_fields %}
+                {{ field.errors }}
+                {{ field.help_text }}
+                {{ field }}
+            {% endfor %}
+
+            <input type="submit" name="submit" value="Create Page" />
+        </form>
+   </div>
+
+{% endblock %}

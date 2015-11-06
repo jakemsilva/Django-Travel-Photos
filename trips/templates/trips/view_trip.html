@@ -1,0 +1,39 @@
+{% extends "trips/trips_base.html" %}
+
+{% block content_trip %}
+<div id="public_view_trip" class="row section-margin white">
+        {% if trip %}
+            {% if experiences %}
+                {% for experience in experiences %}
+                <div class="row">
+                    <div class="trip-info-header">
+                        <h4>{{ trip.year }} <br /><strong>{{ trip.country.name }}</strong></h4>
+                        <h2>{{ experience.title }}</h2>
+                    </div>
+                    <div class="photo-container">
+                        {% if experience.image_set.all %}
+                            <div id="images"> 
+                                {% for a in experience.image_set.all %}
+                                    <img width="50%" src="{{ a.picture_big.url }}" alt="{{ a.picture }}" />
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            <p class="custom-grey text-center margin">No Images Yet</p>
+                        {% endif %}
+                        
+                    </div>
+                    <div class="small-12 columns">
+                        <br />
+                        <p>{{ experience.description }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <h2 class="text-center custom-grey">No experiences currently in trip.</h2>
+            {% endif %}
+        {% else %}
+            The specified trip {{ trip_title }} does not exist!
+        {% endif %}
+        <br />
+</div>
+{% endblock %}

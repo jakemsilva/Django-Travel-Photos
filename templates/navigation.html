@@ -1,0 +1,61 @@
+<section id="top-header">
+        
+    <div class="row">
+  
+        <div class="small-12 medium-6 large-6 columns text-left">
+            <h1 class="logo"><a href="/">Travelerspot <i class="fi-foot"></i></a></h1>
+        </div> 
+        <div class="small-12 medium-3 large-3 columns">
+            <dl class="sub-nav">
+                {% if user.is_authenticated %}
+                <dd>
+                    <a href="{% url 'auth_logout' %}?next=/accounts/login">Logout</a>
+                </dd>
+
+                <dd>
+                    <a href="{% url 'users:index' %}">My Profile</a>&#124;
+                </dd>
+        	    {% else %}
+                <dd>
+            	    <a href="{% url 'auth_login' %}">Login</a>
+                </dd>
+                <dd>
+            	    <a href="{% url 'registration_register' %}">Sign up</a>&#124;
+                </dd>
+                {% endif %}
+            </dl>
+
+        </div> 
+    </div>
+    
+</section>
+<div class="contain-to-grid">
+    <!-- Your nav bar -->
+    <nav class="top-bar">
+        <ul class="title-area">
+            <li class="name"></li>
+            <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+        </ul>
+        <section class="top-bar-section">
+            <div class="row">
+                <div class="small-12 medium-10 medium-offset-1 large-7 large-offset-3">
+                    <ul class="">
+                        {% if user.is_authenticated %}
+                            <li><a href="/">Home</a></li>
+                            <li><a href="{% url 'about' %}">About</a></li>
+                            <li><a href="{% url 'trips:users' %}">Travelers</a></li>
+                            <li><a href="{% url 'trips:my_trips' %}">My Trips</a></li>
+                            <li><a href="/contact/">Contact</a></li>
+                        {% else %}
+                            <li><a href="/">Home</a></li>
+                            <li><a href="{% url 'about' %}">About</a></li>
+                            <li><a href="{% url 'trips:users' %}">Travelers</a></li>
+                            <li><a href="{% url 'registration_register' %}">Signup</a></li>
+                            <li><a href="/contact/">Contact</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </section>
+     </nav>
+</div>

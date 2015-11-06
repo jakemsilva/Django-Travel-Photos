@@ -1,0 +1,108 @@
+{% extends "trips/trips_base.html" %}
+{% load static %}
+{% block content_trip %}
+
+<div class="map-container">
+    <div id="world-map" style="height: 500px;"></div>
+        <div class="map-profile">
+            {% if user_profile_pic %}
+                <img width="125px" src="/media/{{ user_profile_pic }}" alt="profile picture" />
+            {% else %}
+                <img width="125px" src="{% static "accounts/images/avatar.png" %}" alt="profile picture" />
+            {% endif %}
+            <h3 class="custom-grey text-center">{{ username }}</h3>
+        </div>
+        <div class="trip-count">
+            <h3>{{ user_number_of_trips }} Trips</h3>
+        </div>
+</div>
+
+<div id="trips-index" class="row section-margin white">
+	{% if trips %}
+	   <div class="small-12 columns">
+	        <h2 class="custom-blue mb text-center">Recent Trips</h2>
+	    </div>
+	    {% for trip in trips %}
+	        <div class="small-12 medium-6 large-3 columns end">
+	            <a class="trip-panel block" href="/trips/{{ username }}/{{ trip.slug }}">
+	                <div class="trip-panel-header">
+                        <h2>{{ trip.country.name }} <span class="created"> -- {{ trip.year }}</span></h2>
+                        <h3>{{ trip.title }}</h3>
+                    </div>
+                    <div class="trip-panel-image">
+                        <img src="{% get_static_prefix %}/trips/images/countries/{{ trip.country }}.jpg" alt="{{ trip.country.name }}" />  
+                    </div>
+                    <div class="trip-panel-body">
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+        {% if count = 3 %}
+            <div class="large-3 columns">
+                <a class="view-all" href="">View All</a>
+            </div>
+        {% endif %}
+   {% else %}
+   	<div>
+         <h2 class="custom-grey text-center">None yet</h2>
+    </div>
+   {% endif %}
+   
+</div>
+<h2 class="custom-blue mb text-center">Recent Photos</h2>
+{% if all_images %}
+    <div class="image-wall-container">
+        {% for image in all_images %}
+            <img src="{{ image.picture_small.url }}" alt="{{ image.picture }}" /> <!-- New line -->
+        {% endfor %}
+    </div>
+{% else %}
+    <h2 class="custom-grey text-center">None yet</h2>
+{% endif %}
+
+<script>
+$(function(){
+    $('#world-map').vectorMap({
+    map: 'world_mill_en',
+    scaleColors: ['#C8EEFF', '#0071A4'],
+    normalizeFunction: 'polynomial',
+    zoomOnScroll: false,
+    hoverOpacity: 0.7,
+    hoverColor: false,
+    regionStyle: {
+        initial: {
+            fill: '#fdfdfd',
+            "fill-opacity": 1,
+            stroke: 'none',
+            "stroke-width": 0,
+            "stroke-opacity": 1
+        },
+         hover: {
+             "fill-opacity": 1,
+             cursor: 'default'
+         }
+     },
+     onRegionTipShow: function(e, el, code){
+        e.preventDefault();
+    },
+    markerStyle: {
+      initial: {
+            fill: '#54e8c3',
+            stroke: 'black',
+            "fill-opacity": 1,
+            "stroke-width": 5,
+            "stroke-opacity": .5,
+            r: 6,
+        }
+    },
+    backgroundColor: 'none',
+    markers: [
+        {% for trip in countries %}
+            {latLng: [{{ trip.get_lat_lng_display }}], name: '{{ trip.country.name }}'},
+        {% endfor %}
+    ]
+  });
+});
+</script>
+
+{% endblock %}

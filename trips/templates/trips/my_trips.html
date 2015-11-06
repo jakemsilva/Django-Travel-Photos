@@ -1,0 +1,42 @@
+{% extends "trips/trips_base.html" %}
+{% load static %}
+{% block content_trip %}
+
+<div id="trips-index" class="row section-margin white">
+    <div class="small-12 columns">
+        <h3 class="custom-grey mb text-center">My Trips</h3>
+    </div>
+	{% if trips %}
+	    <div class="small-12 medium-6 large-4 columns">
+	        <a href="{% url 'trips:add_trip' %}" class="block text-center a-center"><i class="fi-plus"></i></a>
+	    </div>
+	    {% for trip in trips %}
+	        <div class="small-12 medium-6 large-4 columns end">
+	            <a class="trip-panel block" href="{% url 'trips:view_my_trip' trip.slug %}">
+	                <div class="trip-panel-header">
+                        <h2>{{ trip.country.name }} <span class="created"> -- {{ trip.year }}</span></h2>
+                        <h3>{{ trip.title }}</h3>
+                    </div>
+                    <div class="trip-panel-image">
+                        <img src="{% get_static_prefix %}/trips/images/countries/{{ trip.country }}.jpg" alt="{{ trip.country.name }}" />  
+                    </div>
+                    <div class="trip-panel-body">
+                         
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+   {% else %}
+   	<div class="welcome">
+      	<h1 class="text-center">Welcome {{ user.username }}</h1> 
+      	<h2 class="text-center">Add your first trip.</h2>
+      	
+      	<a class="block text-center" href="/trips/add_trip" >
+      		<i class="fi-foot"></i>
+      	</a>
+      </div>
+   {% endif %}
+   
+</div>
+
+{% endblock %}

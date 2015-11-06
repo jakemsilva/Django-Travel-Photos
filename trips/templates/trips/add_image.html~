@@ -1,0 +1,10 @@
+<form id="user_form" method="post" action="/trips/{{ trip_title_slug }}/{{ experience_id }}/add_image/"
+                enctype="multipart/form-data">
+
+            {% csrf_token %}
+            {{ image_form.as_p }}
+
+
+            <!-- Provide a button to click to submit the form. -->
+            <input type="submit" name="submit" value="Register" />
+        </form>

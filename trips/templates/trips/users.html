@@ -1,0 +1,24 @@
+{% extends "trips/trips_base.html" %}
+{% load static %}
+{% block content_trip %}
+
+    <div id="trips-users" class="row white section-margin">
+        {% if user %}
+            {% for user in users %}
+                <a class="small-2 columns end" href="{% url 'trips:index' user.username %}">
+                    <h5 class="text-center">{{ user.count_number_of_trips }} Trip(s)</h5>
+                    {% if user.profile.picture %}
+                        <img src="/media/{{ user.profile.picture }}" alt="profile picture" />
+                    {% else %}
+                        <img src="{% static "accounts/images/avatar.png" %}" alt="avatar" />   
+                    {% endif %}
+                    <h4 class="text-center custom-blue">{{ user.username }}</h4>
+                </a>
+            {% endfor %}
+        
+        {% else %}
+            <h1>no users</h1>
+        {% endif %}
+    </div>
+
+{% endblock %}

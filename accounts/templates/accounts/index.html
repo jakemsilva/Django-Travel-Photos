@@ -1,0 +1,41 @@
+{% extends "accounts/accounts_base.html" %}
+{% load static %}
+
+{% block content_accounts %}
+
+    <div class="row white section-margin">
+        <div class="small-6 small-offset-3 columns">
+            <table>
+                <tbody>
+                    <tr>
+                        <td width="40%">
+                            {% if profile_pic %}
+                                <img width="80%" src="/media/{{ profile_pic.picture }}" alt="Picture of Rango" />
+                            {% else %}
+                                <img width="80%" src="{% static "accounts/images/avatar.png" %}" alt="avatar" />
+                                <br /><a href="/users/add_profile_pic/">add</a>
+                            {% endif %}  
+                        </td>
+                        <td width="60%"><h2>Account Info</h2></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Username:
+                        </td>
+                        <td>
+                            {{ user.username }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Email:
+                        </td>
+                        <td>
+                            {{ user.email }}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

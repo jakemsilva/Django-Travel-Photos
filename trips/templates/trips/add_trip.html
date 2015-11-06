@@ -1,0 +1,25 @@
+{% extends "trips/trips_base.html" %}
+
+{% block content_trip %}
+<div class="row white section-margin">
+	<div class="small-6 small-offset-3 columns">
+        <h2 class="custom-grey text-center">Add a Trip</h2>
+
+        <form id="page_form" method="post" action="/trips/add_trip/">
+
+            {% csrf_token %}
+            {% for hidden in form.hidden_fields %}
+                {{ hidden }}
+            {% endfor %}
+
+            {% for field in form.visible_fields %}
+                {{ field.errors }}
+                {{ field.help_text }}
+                {{ field }}
+            {% endfor %}
+
+            <input type="submit" name="submit" value="Submit" class="button" />
+        </form>
+   </div>
+</div>
+{% endblock %}

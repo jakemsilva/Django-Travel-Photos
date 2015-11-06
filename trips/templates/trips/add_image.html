@@ -1,0 +1,78 @@
+{% extends "trips/trips_base.html" %}
+
+{% block content_trip %}
+    <div class="row section-margin white">
+        <h2 class="custom-grey text-left">{{ experience }}</h2>
+        <div id="images">
+            {% if images %}
+                {% for image in images %}
+                    <a href="#" data-reveal-id="myModal" data-my-image="{{ image.picture_big }}" data-view-image="{{ image.picture_big.url }}">
+                        <img width="50%" src="{{ image.picture_big.url }}" alt="{{ image.picture }}" />
+                    </a>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <div class="small-6 columns">
+            <form id="user_form" method="post" action="/trips/{{ trip_title_slug }}/{{ experience_id }}/add_image/"
+                enctype="multipart/form-data">
+
+                {% csrf_token %}
+                {{ image_form.as_p }}
+                <!-- Provide a button to click to submit the form. -->
+                <input type="submit" name="submit" value="Add" class="button tiny" />
+            </form>
+        </div>
+    </div>
+    <!-- Modal -->
+ <div id="myModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+  <div class="edit-bar">
+     <a id="rotate" href="#" data-image-view="" data-image=""><i class="fi-refresh"></i></a>
+     <a id="contrast" href="#" data-image-view="" data-image=""><i class="fi-photo"></i></a>
+  </div>
+  <img id="editable-img" width="50%" class="modal-image block" src="#" />
+  <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+</div>    
+<script>
+
+$('[data-reveal-id]').on('click', function() {
+  var targetModal = $('#' + $(this).data('revealId'));
+  var baseImage = $(this).data('myImage');
+  var viewImage = $(this).data('viewImage');
+  
+  targetModal.find('.modal-image').attr("src",viewImage);
+  targetModal.find('#rotate').attr("data-image",baseImage);
+  targetModal.find('#contrast').attr("data-image",baseImage);
+});
+</script>
+<script>
+    var deg = 0;
+    $('#rotate').click(function(){
+        
+        deg += 90;
+        console.log(deg);
+        var rotate = 'rotate(' + deg + 'deg)';
+        $('.modal-image').css({ 
+            '-webkit-transform': rotate,
+            '-moz-transform': rotate,
+            '-o-transform': rotate,
+            '-ms-transform': rotate,
+            'transform': rotate 
+        });
+        var image;
+        image = $(this).attr("data-image");
+        $.get('/image-edit/rotate_image_right/', {image: image}, function(data){
+      
+        });
+});
+</script>
+<script>
+
+    $('#contrast').click(function(){
+        var image = $(this).attr("data-image");
+        $.get('/image-edit/change_image_color/', {image: image}, function(data){
+      $("#editable-img").attr("src", '/media/' + image + '?d=' + new Date().getTime());
+      
+        });
+});
+</script>
+{% endblock %}
